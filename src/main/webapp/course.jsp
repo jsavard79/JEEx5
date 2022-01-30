@@ -10,29 +10,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>People</title>
+        <title>Course</title>
         <%@include file="WEB-INF/jspf/header.jspf" %>
     </head>
     <body>
          <%@include file="WEB-INF/jspf/navigation.jspf" %>
-        <h1>People</h1>
+        <h1>Course</h1>
         <table class="table table-striped">
             <tr>
                 <th>
-                    Id
+                    Course Id
                 </th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Salary</th>
-            </tr>
-           
+                <th>Course Name</th>
+                <th>Course Term</th>              
+            </tr>           
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td></td>                
             </tr>
                 
         </table>
