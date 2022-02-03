@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page import="edu.nbcc.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,11 +24,14 @@
                 <th>Course Name</th>
                 <th>Course Term</th>              
             </tr>           
+           
             <tr>
+                <td></a></td>
                 <td></td>
                 <td></td>
-                <td></td>                
+             
             </tr>
+                
                 
         </table>
         <%@include file="WEB-INF/jspf/footer.jspf" %>

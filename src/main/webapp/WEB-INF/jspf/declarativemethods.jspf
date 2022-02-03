@@ -3,9 +3,10 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.NumberFormat"%>
+
 <%@ page pageEncoding="UTF-8" %>
 <%!
-    ArrayList<String> errors = new ArrayList<String>();  
+
 
     /**
      * Check for required fields. Adds a field specific error to errors list for missing value
