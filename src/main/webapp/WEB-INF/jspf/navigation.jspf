@@ -15,7 +15,10 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="courseForm.jsp"><i class="fas fa-angle-double-right"></i> Create a new Course</a>
-            </li>            
+            </li>     
+            <li class="nav-item">
+                <a class="nav-link" href="people.jsp"><i class="fas fa-angle-double-right"></i> People</a>
+            </li>      
         </ul>
     </div>
 </nav>

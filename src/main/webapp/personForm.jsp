@@ -1,45 +1,36 @@
-<%-- 
-    Document   : personForm
-    Created on : Jan 22, 2020, 2:13:47 PM
-    Author     : Chris.Cusack
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@include file="WEB-INF/jspf/declarativemethods.jspf" %>
 <%
-	Course qCourse = null;
+	Person qPerson = null;
+	setupPeople();
+	errors = new ArrayList<String>();
 	int id = 0;
 	boolean submitted = false;
-	errors = new ArrayList<String>();
-	setupCourse();
 	String name = "";
-	String termString = "";
-	int term = 0;
+	String email = "";
+	double salary;
 
 	if(request.getParameter("btnSubmit") != null){
 		if(request.getParameter("id") != null && isNumeric(request.getParameter("id"))){
 			id = getIntegerValue(request.getParameter("id"));		
-			qCourse = course.getCourse(id);
 		} else {
-			qCourse = new Course();
+			qPerson = new Person();
 		}
 		
-		name = checkRequiredField(request.getParameter("name"), "Course Name");
-		termString = checkRequiredField(request.getParameter("term"), "Course term");
+		name = checkRequiredField(request.getParameter("name"), "Name");
+		email = checkRequiredField(request.getParameter("email"), "Email address");
+		String salaryString = checkRequiredField(request.getParameter("salary"), "Salary");
 		
-		term = isNumeric(termString, "Course term")? Integer.parseInt(termString) : 0;
+		salary = isNumeric(salaryString, "Salary")? Double.parseDouble(salaryString) : 0;
 		
-		qCourse = course.getCourse(id);
-		qCourse.setId(id);
-		qCourse.setName(name);
-		qCourse.setTerm(term);
-		if (errors.size() == 0)
-			submitted = true;
-
-	} else {
+		qPerson = person.getPerson(id);
+		
+		submitted = true;
+	}else {
 		if (request.getParameter("id")!= null && isNumeric(request.getParameter("id")) ) {
 			id = getIntegerValue(request.getParameter("id"));		
-			qCourse = course.getCourse(id);
+			qPerson = person.getPerson(id);
 		}
 	}
  
@@ -61,23 +52,29 @@
        
         <form method="POST" >
             <table class="table"> 
-                <% if (qCourse != null ){ %>
+                <% if (qPerson != null ){ %>
                     <tr>
-                        <td>Course Id</td>
+                        <td>Id</td>
                         <td>
-                           <input  type="hidden" name="id" value=<%=!submitted && qCourse !=null ? qCourse.getId() : "" %>/>                       
+                           <input  type="hidden" name="id" value=<%=!submitted && qPerson !=null ? qPerson.getId() : "" %>/>                       
                         </td>
                     </tr>            
                 <tr>                    
-                    <td>Course Name</td>
+                    <td>Name</td>
                     <td>
-                    <input  type="text" name="name" value="<%= !submitted && qCourse !=null ? qCourse.getName() : "" %>" />  
+                    <input  type="text" name="name" value="<%= !submitted && qPerson !=null ? qPerson.getFirstName() : "" %> <%= !submitted && qPerson !=null ? qPerson.getLastName() : "" %>" />  
                     </td>
                 </tr>
                 <tr>                    
-                    <td>Course Term</td>
+                    <td>Email Address</td>
                     <td>
-						<input  type="text" name="term" value=<%= !submitted && qCourse !=null ? qCourse.getTerm() : "" %> />                     
+						<input  type="text" name="email" value=<%= !submitted && qPerson !=null ? qPerson.getEmailAddress() : "" %> />                     
+                    </td>
+                </tr>
+                <tr>                    
+                    <td>Salary</td>
+                    <td>
+						<input  type="text" name="salary" value=<%= !submitted && qPerson !=null ? qPerson.getSalary() : "" %> />                     
                     </td>
                 </tr>
                  
@@ -103,21 +100,23 @@
 	   <% 
 	   } else {	   
 	   %>
-
         <table class="table">               
             <tr>                    
-                <td>Course Id</td>
-                <td><%=qCourse.getId() %></td>
+                <td>Id</td>
+                <td><%=qPerson.getId() %></td>
             </tr>
             <tr>                    
-                <td>Course Name</td>
-                <td><%=qCourse.getName() %></td>
+                <td>Name</td>
+                <td><%= qPerson.getFirstName() %> <%= qPerson.getLastName() %></td>
             </tr>
             <tr>                    
-                <td>Course Term</td>
-                <td><%=qCourse.getTerm() %></td>
+                <td>Email Address</td>
+                <td><%= qPerson.getEmailAddress() %></td>
             </tr>   
-            
+            <tr>                    
+                <td>Salary</td>
+                <td><%= currencyFormatter(qPerson.getSalary()) %></td>
+            </tr>  
         </table>
       <% } %>
         <%@include file="WEB-INF/jspf/footer.jspf" %>  

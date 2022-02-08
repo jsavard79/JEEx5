@@ -1,10 +1,5 @@
-<%-- 
-    Document   : courseDetails
-    Created on : Jan 22, 2020, 2:04:29 PM
-    Author     : Chris.Cusack
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@include file="WEB-INF/jspf/declarativemethods.jspf" %>
 <%@ page import="edu.nbcc.*" %>
 
@@ -12,37 +7,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Index</title>
+        <title>Person Details</title>
         <%@include file="WEB-INF/jspf/header.jspf" %>
     </head>
     <body>
-        <h1>Post Example</h1>
+        <h1>Person Details</h1>
         <%@include file="WEB-INF/jspf/navigation.jspf" %>
-		<% setupCourse(); 
-			Course qCourse = null;
+		<% setupPeople(); 
+			Person qPerson = null;
 			if(request.getParameter("id") != null && isNumeric(request.getParameter("id"))){
 				int id = getIntegerValue(request.getParameter("id"));
-				qCourse = course.getCourse(id);
+				qPerson = person.getPerson(id);
 			}
 		%>
         <table class="table">               
             <tr>                    
-                <td>Course Id</td>
-                <td><%=qCourse.getId() %></td>
+                <td>Id</td>
+                <td><%=qPerson.getId() %></td>
             </tr>
             <tr>                    
-                <td>Course Name</td>
-                <td><%= qCourse.getName() %></td>
+                <td>Name</td>
+                <td><%= qPerson.getFirstName() %> <%= qPerson.getLastName() %></td>
             </tr>
             <tr>                    
-                <td>Course Term</td>
-                <td><%= qCourse.getTerm() %></td>
+                <td>Email Address</td>
+                <td><%= qPerson.getEmailAddress() %></td>
             </tr>   
-           
+            <tr>                    
+                <td>Salary</td>
+                <td><%= currencyFormatter(qPerson.getSalary()) %></td>
+            </tr>  
         </table>
-      
-        
-        
+            
         <%@include file="WEB-INF/jspf/footer.jspf" %>
     </body>    
 </html>

@@ -4,22 +4,32 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="edu.nbcc.course.Course" %>
+<%@page import="edu.nbcc.person.Person" %>
+
 <%@ page pageEncoding="UTF-8" %>
 <%!
 
 ArrayList<String> errors = new ArrayList<String>();
 public Course course;
 
-public void setupCourse() {
-	if (course == null) {
+public void setupCourse(){
+	if(course == null){
 		course = new Course();
 	}
 }
+
+public Person person;
+
+public void setupPeople(){
+	if(person == null){
+		person = new Person();
+	}
+}
+
     /**
      * Check for required fields. Adds a field specific error to errors list for missing value
      */
     private String checkRequiredField(String value, String fieldName) {
-    	
         if (value.equals("")) {
             errors.add(fieldName + " is required");
         }
